@@ -30,7 +30,14 @@ class Manager
     {
         $this->process->start();
 
-        sleep(5);
+        $timeout = 5;
+        $sleep = 1;
+        $inc = 0;
+        while(! $this->client->isRunning() && $inc <= $timeout){
+           sleep(1);
+           $inc += $sleep;
+        }
+
         if(! $this->client->isRunning()) {
             throw new \Exception('Robohydra could not be reached');
         }
@@ -38,6 +45,7 @@ class Manager
 
     public function stop()
     {
-        //$this->process->stop();
+        //not actually sure if this is needed
+        $this->process->stop();
     }
 }

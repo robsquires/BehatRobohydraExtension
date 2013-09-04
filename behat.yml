@@ -1,4 +1,7 @@
 default:
     extensions:
         Squirrel\Behat\RobohydraExtension\Extension:
-            host: localhost
+            host: localhost:3000
+            dir: /home/vagrant/projects/UVd/LimpidMarkets/code/web-services/api/
+            conf_file: hydra.conf
+            plugins_path: robohydra/plugins

@@ -23,8 +23,7 @@ class Client
     }
 
 
-
-    public function isRunning()
+    private function doGet($path)
     {
         try{
             $response = $this
@@ -33,14 +32,25 @@ class Client
                     sprintf(
                         "%s%s",
                         $this->host,
-                        '/'
+                        $path
                     )
                 )
             ;
         }
         catch(ClientException $e) {
-            return false;
+            return null;
         }
-        return true;
+        return $response;
+    }
+
+    public function isRunning()
+    {
+        return $this->doGet('/') == null ? false : true;
+    }
+
+
+    public function get($path)
+    {
+        $this->doGet($path);
     }
 }

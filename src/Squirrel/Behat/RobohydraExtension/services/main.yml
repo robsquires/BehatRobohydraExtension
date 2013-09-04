@@ -7,6 +7,8 @@ parameters:
     squirrel.behat_robohydra.client.class: Squirrel\Behat\RobohydraExtension\Client
     squirrel.behat_robohydra.buzz.browser.class: Buzz\Browser
 
+    squirrel.behat_robohydra.context.initializer.class: Squirrel\Behat\RobohydraExtension\Context\Initializer\RobohydraAwareInitializer
+
 services:
     squirrel.behat_robohydra.processlistener:
         class: %squirrel.behat_robohydra.processlistener.class%
@@ -24,9 +26,9 @@ services:
     squirrel.behat_robohydra.processbuilder:
         class: %squirrel.behat_robohydra.processbuilder.class%
         arguments:
-            - ["exec", "robohydra", "hydra.conf" ]
+            - %squirrel.behat_robohydra.process.args%
         calls:
-            -  [setWorkingDirectory, ["/home/vagrant/projects/UVd/LimpidMarkets/code/web-services/api/"]]
+            -  [setWorkingDirectory, [%squirrel.behat_robohydra.process.dir%]]
 
     squirrel.behat_robohydra.process:
         class: %squirrel.behat_robohydra.process.class%
@@ -40,7 +42,11 @@ services:
         class: %squirrel.behat_robohydra.client.class%
         arguments:
             - @squirrel.behat_robohydra.buzz.browser
-            - 'localhost:3000'
+            - %squirrel.behat_robohydra.process.host%
 
-
-
+    squirrel.behat_robohydra.context.initializer:
+        class: %squirrel.behat_robohydra.context.initializer.class%
+        arguments:
+            - @squirrel.behat_robohydra.client
+        tags:
+            - { name: behat.context.initializer }

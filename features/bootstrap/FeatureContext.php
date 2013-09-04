@@ -7,6 +7,8 @@ use Behat\Behat\Context\ClosuredContextInterface,
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 
+use Squirrel\Behat\RobohydraExtension\Context\RobohydraContext;
+
 //
 // Require 3rd-party libraries here:
 //
@@ -17,7 +19,7 @@ use Behat\Gherkin\Node\PyStringNode,
 /**
  * Features context.
  */
-class FeatureContext extends BehatContext
+class FeatureContext extends RobohydraContext
 {
     /**
      * Initializes context.
@@ -35,7 +37,7 @@ class FeatureContext extends BehatContext
      */
     public function robohydraShouldBeRunnning()
     {
-        throw new PendingException();
+        $this->robohydra->get('/');
     }
 //
 // Place your definition and hook methods here:
