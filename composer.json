@@ -1,0 +1,23 @@
+{
+    "name": "rob-squires/behat-robohydra-extension",
+    
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    },
+
+    "require": {
+        "behat/behat": "2.4.*@stable",
+        "symfony/process": "2.4.*@dev",
+        "kriswallsmith/buzz": "dev-master"
+    },
+    
+    "require-dev": {
+        "phpspec/phpspec": "2.0.*@dev"
+    },
+    
+    "config": {
+        "bin-dir": "bin/"
+    }
+}

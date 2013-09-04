@@ -1,0 +1,4 @@
+default:
+    extensions:
+        Squirrel\Behat\RobohydraExtension\Extension:
+            host: localhost

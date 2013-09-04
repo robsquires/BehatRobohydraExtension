@@ -1,0 +1,46 @@
+parameters:
+    squirrel.behat_robohydra.processlistener.class: Squirrel\Behat\RobohydraExtension\Listener\ProcessListener
+    squirrel.behat_robohydra.processmanager.class: Squirrel\Behat\RobohydraExtension\Process\Manager
+    squirrel.behat_robohydra.process.class: Symfony\Component\Process\Process
+    squirrel.behat_robohydra.processbuilder.class: Symfony\Component\Process\ProcessBuilder
+
+    squirrel.behat_robohydra.client.class: Squirrel\Behat\RobohydraExtension\Client
+    squirrel.behat_robohydra.buzz.browser.class: Buzz\Browser
+
+services:
+    squirrel.behat_robohydra.processlistener:
+        class: %squirrel.behat_robohydra.processlistener.class%
+        arguments:
+            - @squirrel.behat_robohydra.processmanager
+        tags:
+            - { name: behat.event_subscriber, priority: 0 }
+
+    squirrel.behat_robohydra.processmanager:
+        class: %squirrel.behat_robohydra.processmanager.class%
+        arguments:
+            - @squirrel.behat_robohydra.process
+            - @squirrel.behat_robohydra.client
+
+    squirrel.behat_robohydra.processbuilder:
+        class: %squirrel.behat_robohydra.processbuilder.class%
+        arguments:
+            - ["exec", "robohydra", "hydra.conf" ]
+        calls:
+            -  [setWorkingDirectory, ["/home/vagrant/projects/UVd/LimpidMarkets/code/web-services/api/"]]
+
+    squirrel.behat_robohydra.process:
+        class: %squirrel.behat_robohydra.process.class%
+        factory_service: squirrel.behat_robohydra.processbuilder
+        factory_method:   getProcess
+
+    squirrel.behat_robohydra.buzz.browser:
+        class: %squirrel.behat_robohydra.buzz.browser.class%
+
+    squirrel.behat_robohydra.client:
+        class: %squirrel.behat_robohydra.client.class%
+        arguments:
+            - @squirrel.behat_robohydra.buzz.browser
+            - 'localhost:3000'
+
+
+
