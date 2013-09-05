@@ -23,7 +23,8 @@ class Extension implements ExtensionInterface
             'squirrel.behat_robohydra.process.args', 
             array(
                 "exec",
-                "robohydra",
+                "node",
+                "node_modules/robohydra/bin/robohydra",
                 $config['conf_file'],
                 "-I",
                 $config['plugins_path']
