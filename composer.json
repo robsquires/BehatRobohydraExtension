@@ -1,5 +1,5 @@
 {
-    "name": "rob-squires/behat-robohydra-extension",
+    "name": "squirrel/behat-robohydra-extension",
     
     "autoload": {
         "psr-0": {
