@@ -51,6 +51,6 @@ class Client
 
     public function get($path)
     {
-        $this->doGet($path);
+        return $this->doGet($path);
     }
 }
