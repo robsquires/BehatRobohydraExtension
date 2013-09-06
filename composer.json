@@ -8,12 +8,12 @@
     },
 
     "require": {
-        "behat/behat": "2.4.*@stable",
         "symfony/process": "2.3.*@dev",
         "kriswallsmith/buzz": "dev-master"
     },
     
     "require-dev": {
+        "behat/behat": "~2.5.0",
         "phpspec/phpspec": "2.0.*@dev"
     },
     
