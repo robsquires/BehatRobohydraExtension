@@ -45,7 +45,7 @@ class Client
 
     public function isRunning()
     {
-        return $this->doGet('/') == null ? false : true;
+        return $this->doGet('/robohydra-admin') == null ? false : true;
     }
 
 
